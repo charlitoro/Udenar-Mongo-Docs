@@ -26,7 +26,10 @@
 ## Operaciones CRUD
 
 * [Inserción de Documentos](operaciones-crud/insercion-de-documentos.md)
-* [Consulta de Docuementos](operaciones-crud/consulta-de-docuementos.md)
+* [Consulta de Docuementos](operaciones-crud/consulta-de-docuementos/README.md)
+  * [Documentos Incrustado/Anidados](operaciones-crud/consulta-de-docuementos/documentos-incrustado-anidados.md)
+  * [Arrays](operaciones-crud/consulta-de-docuementos/arrays.md)
+  * [Array de Documentos Incrustados](operaciones-crud/consulta-de-docuementos/array-de-documentos-incrustados.md)
 * [Actualización de Documentos](operaciones-crud/actualizacion-de-documentos.md)
 * [Eliminación de Documentos](operaciones-crud/eliminacion-de-documentos.md)
 * [Búsqueda de Texto](operaciones-crud/busqueda-de-texto.md)
