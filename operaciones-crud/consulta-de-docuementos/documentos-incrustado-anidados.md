@@ -12,7 +12,7 @@ db.inventory.insertMany( [
 ]);
 ```
 
-### Documento Incrustado/Anidado
+## Documento Incrustado/Anidado
 
 El schema de mongo permite anidar documentos dentro de otro. Cuanto se trabaja con la estructura **JSON** es claro mirar como un objeto puede tener varios niveles de profundidad:
 
@@ -34,7 +34,7 @@ El schema de mongo permite anidar documentos dentro de otro. Cuanto se trabaja c
 
 En la inserción de un documento se inserta en un campo otros documentos de una manera similar al ejemplo anterior. Esa es la forma como se incrustan documentos dentro de otros en mongo.
 
-### Consultar un Documento Incrustado/Anidado
+## Consultar un Documento Incrustado/Anidado
 
 Para una especifica condición de igualdad de un campo que esta en un documento incrustado, use la estructura **{ &lt;campo&gt;: &lt;valor&gt; }** donde **&lt;valor&gt;** es el documento a encontrar.
 
@@ -50,11 +50,11 @@ Las coincidencias de igualdad donde todo el documento incrustado requiera una co
 db.inventory.find(  { size: { w: 21, h: 14, uom: "cm" } }  )
 ```
 
-### Consulta de un Campo Anidado
+## Consulta de un Campo Anidado
 
 Para especificar la condición de búsqueda de un campo insertado o anidado, usar la **notación punto** \(campo.campoAnidado\): 
 
-#### Condición igualdad de un campo incrustado
+### Condición igualdad de un campo incrustado
 
 El siguiente ejemplo retorna todos los elementos donde el campo **uom** incrustado en el campo **size** sea igual a "**in**":
 
@@ -62,7 +62,7 @@ El siguiente ejemplo retorna todos los elementos donde el campo **uom** incrusta
 db.inventory.find( { "size.uom": "in" } )
 ```
 
-#### Condición especifica usando operadores
+### Condición especifica usando operadores
 
 Una consulta de un campo puede usar operadores dentro de una condición de la siguiente forma:
 
@@ -76,7 +76,7 @@ La siguiente consulta usa el operador menor que \(**$lt**\) en el campo **h** in
 db.inventory.find( { "size.h": { $lt: 15 } } )
 ```
 
-#### Condición AND
+### Condición AND
 
 La siguiente consulta retorna todos los documentos donde el campo anidado **h**  es menor que  **15**, el campo anidado **uom** sea igual a "**in**" y el campo **status** sea igual a "**D**" :
 

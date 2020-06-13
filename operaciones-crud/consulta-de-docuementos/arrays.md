@@ -12,7 +12,7 @@ db.inventory.insertMany([
 ]);
 ```
 
-### Consultar por Campo Array
+## Consultar por Campo Array
 
 Para condiciones especificas de igualdad en un array, use el documento **{ &lt;campo&gt;: &lt;valor&gt; }** donde **&lt;valor&gt;** es un array exacto, incluido el orden de los elementos del array 
 
@@ -28,7 +28,7 @@ Sí, en lugar, se quiere buscar un array que contenga ambos elementos, "**red**"
 db.inventory.find( { tags: { $all: ["red", "blank"] } } )
 ```
 
-### Consultar Por el Elemento de un Array
+## Consultar Por el Elemento de un Array
 
 En las consultad donde un campo array contiene al menos uno de los elementos con un especifico valor, usar el filtro **{ &lt;campo&gt;: &lt;valor&gt; }** donde el **&lt;valor&gt;** es el elemento valor buscado:
 
@@ -50,11 +50,11 @@ La siguiente consulta retorna todos los documentos donde el array **dim\_cm** co
 db.inventory.find( { dim_cm: { $gt: 25 } } )
 ```
 
-### Multiples Condiciones para Elementos de un Array
+## Multiples Condiciones para Elementos de un Array
 
 Cuando especificamos multiples condiciones sobre elementos de una array, es posible realizar la consulta de modo que un solo elemento del array cumpla con esta condición o cualquiera de los elementos cumpla con la condición.
 
-#### Consultar con filtro compuesto sobre elementos de un array
+### Consultar con filtro compuesto sobre elementos de un array
 
 El siguiente ejemplo consulta por documentos donde el array **dim\_cm** contiene elementos que en alguna combinación satisface la condición; por ejemplo, un elemento pude satisface la condición mayor que \(**$gt**\) **15** y otro elemento puede satisfacer la condición menor que \(**$lt**\) **20**, o una elemento pude satisfacer ambas condiciones:
 
@@ -62,7 +62,7 @@ El siguiente ejemplo consulta por documentos donde el array **dim\_cm** contiene
 db.inventory.find( { dim_cm: { $gt: 15, $lt: 20 } } )
 ```
 
-#### Consultar por un array de elementos que cumplan con varias criterios
+### Consultar por un array de elementos que cumplan con varias criterios
 
 Utilizar el operador **$elemMatch** para especificar multiple criterios sobre elementos de un array donde al menos one de los elementos cumpla todos los criterios especificados:
 
@@ -72,7 +72,7 @@ El siguiente ejemplo consulta por los documentos donde el array **dim\_cm** cont
 db.inventory.find( { dim_cm: { $elemMatch: { $gt: 22, $lt: 30 } } } )
 ```
 
-#### Consultar elemento por el indice de posición en el array
+### Consultar elemento por el indice de posición en el array
 
 Utilizando la **notación punto,** es posible la condición de consulta por un elemento en una index o posición en el array. Los array inician por indice zero\(0\).
 
@@ -82,7 +82,7 @@ El siguiente ejemplo consulta todos los documentos donde el segundo elemento en 
 db.inventory.find( { "dim_cm.1": { $gt: 25 } } )
 ```
 
-#### Consultar por el tamaño de un array 
+### Consultar por el tamaño de un array 
 
 Utilice el operador **$size** para consultar por el numero de elementos de un array. El siguiente ejemplo consulta los documentos donde el array **tags** tenga 3 elementos:
 

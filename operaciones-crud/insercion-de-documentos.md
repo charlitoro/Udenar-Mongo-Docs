@@ -1,6 +1,6 @@
 # Inserción de Documentos
 
-### Insertar un Solo Documento
+## Insertar un Solo Documento
 
 El método **db.collection.insertOne\(&lt;{data}&gt;\)** inserta un documento en la colección.
 
@@ -26,7 +26,7 @@ El siguiente ejemplo inserta un nuevo documento en la colección **inventario**.
 > db.inventario.find({nombre: "Gel Antibacterial"})
 ```
 
-### Insertar Multiple Documentos
+## Insertar Multiple Documentos
 
 _Desde la version 3.2_
 
@@ -54,13 +54,13 @@ El método **db.collection.insertMany\(&lt;\[data\]&gt;\)** permite insertar mul
 > db.inventario.find( {} )
 ```
 
-### Funcionamiento
+## Funcionamiento
 
-#### Creación de colección
+### Creación de colección
 
 Si la colección a la que se le inserta uno o multiples documentos no existe, Mongo creara esta colección e insertara los documentos.  
 
-#### Campo \_id
+### Campo \_id
 
 En MongoDB, cada documento almacenado en una colección requiere un campo id único que actue como una llave primaria \(primary key\). Sí un documento insertado omite __el campo **\_**_**id,**_ Mongo automaticamente generara un tipo de dato **ObjectId** en el campo _**\_id**_.
 
