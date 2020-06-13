@@ -1,4 +1,4 @@
-# Proyección de Campos
+# Proyección en Documentos
 
 Por defecto, las consultas en **MongoDB** retorna todos los campos de los documentos encontrados. Para limitar la cantidad de datos que **MongoDB** envía, pude incluir un documento de proyección que limite los campos a retornar.
 

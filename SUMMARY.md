@@ -30,7 +30,7 @@
   * [Documentos Incrustado/Anidados](operaciones-crud/consulta-de-docuementos/documentos-incrustado-anidados.md)
   * [Arrays](operaciones-crud/consulta-de-docuementos/arrays.md)
   * [Array de Documentos Incrustados](operaciones-crud/consulta-de-docuementos/array-de-documentos-incrustados.md)
-  * [Proyección de Campos](operaciones-crud/consulta-de-docuementos/proyeccion-de-campos.md)
+  * [Proyección en Documentos](operaciones-crud/consulta-de-docuementos/proyeccion-de-campos.md)
 * [Actualización de Documentos](operaciones-crud/actualizacion-de-documentos.md)
 * [Eliminación de Documentos](operaciones-crud/eliminacion-de-documentos.md)
 * [Búsqueda de Texto](operaciones-crud/busqueda-de-texto.md)
