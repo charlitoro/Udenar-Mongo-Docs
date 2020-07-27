@@ -5,7 +5,6 @@
 ## Introducción
 
 * [Bases de datos NoSQL](introduccion/bases-de-datos-nosql.md)
-* [MongoDB](introduccion/mongodb.md)
 * [Colecciones y Documentos](introduccion/colecciones-y-documentos.md)
 * [Tipo de Dato BSON](introduccion/tipo-de-dato-bjson.md)
 
