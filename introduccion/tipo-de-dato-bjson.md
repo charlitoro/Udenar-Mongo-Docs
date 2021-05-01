@@ -99,7 +99,3 @@ myDate.getMonth()
 {% endtab %}
 {% endtabs %}
 
- 
-
- 
-

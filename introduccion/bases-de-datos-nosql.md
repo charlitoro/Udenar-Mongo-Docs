@@ -45,5 +45,3 @@ Las bases de datos basadas en Grafos nos permiten establecer conexiones entre nu
 
 ![](../.gitbook/assets/graph-db.png)
 
-
-

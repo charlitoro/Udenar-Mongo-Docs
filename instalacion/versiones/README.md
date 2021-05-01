@@ -248,5 +248,3 @@ Si solo instaló los ejecutables y no instaló MongoDB como un servicio de Windo
 
 A partir de la versión 4.0, puede instalar y configurar MongoDB como un servicio de Windows durante la instalación, y el servicio MongoDB se inicia después de una instalación exitosa. MongoDB se configura utilizando el archivo de configuración   bin  mongod.cfg.
 
-
-
