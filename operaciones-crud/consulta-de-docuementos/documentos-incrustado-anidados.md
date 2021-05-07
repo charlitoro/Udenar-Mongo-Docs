@@ -1,4 +1,4 @@
-# Documentos Incrustado/Anidados
+# Documentos Incrustados/Anidados
 
 Los ejemplos de esta pagina utilizan la colección **inventory.** Para llenar la colección **inventory,** ejecuta el siguiente comando:
 

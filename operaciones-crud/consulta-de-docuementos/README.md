@@ -1,4 +1,4 @@
-# Consulta de Docuementos
+# Consulta de Documentos
 
 En anteriores secciones se ha utilizado el método **db.collection.find\(\)** para la consulta de algunos documentos insertados. Los ejemplos de esta pagina utilizan la colección **inventory.** Para llenar la colección **inventory,** ejecuta el siguiente comando:
 

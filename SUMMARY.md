@@ -25,8 +25,8 @@
 ## Operaciones CRUD
 
 * [Inserción de Documentos](operaciones-crud/insercion-de-documentos.md)
-* [Consulta de Docuementos](operaciones-crud/consulta-de-docuementos/README.md)
-  * [Documentos Incrustado/Anidados](operaciones-crud/consulta-de-docuementos/documentos-incrustado-anidados.md)
+* [Consulta de Documentos](operaciones-crud/consulta-de-docuementos/README.md)
+  * [Documentos Incrustados/Anidados](operaciones-crud/consulta-de-docuementos/documentos-incrustado-anidados.md)
   * [Arrays](operaciones-crud/consulta-de-docuementos/arrays.md)
   * [Array de Documentos Incrustados](operaciones-crud/consulta-de-docuementos/array-de-documentos-incrustados.md)
   * [Proyección en Documentos](operaciones-crud/consulta-de-docuementos/proyeccion-de-campos.md)
@@ -39,13 +39,27 @@
 
 * [Introducción al Modelado de Datos](modelo-de-datos/introduccion-al-modelado-de-datos.md)
 * [Validación del Esquema](modelo-de-datos/validacion-del-esquema.md)
-* [Conceptos del Modelado de Datos](modelo-de-datos/conceptos-del-modelado-de-datos.md)
-* [Relaciones entre Documentos](modelo-de-datos/relaciones-entre-documentos.md)
-* [Estructura en Árbol](modelo-de-datos/estructura-en-arbol.md)
+* [Conceptos del Modelado de Datos](modelo-de-datos/conceptos-del-modelado-de-datos/README.md)
+  * [Diseño de modelos de datos](modelo-de-datos/conceptos-del-modelado-de-datos/diseno-de-modelos-de-datos.md)
+  * [Factores operativos y modelos de datos](modelo-de-datos/conceptos-del-modelado-de-datos/factores-operativos-y-modelos-de-datos.md)
+* [Relaciones entre Documentos](modelo-de-datos/relaciones-entre-documentos/README.md)
+  * [Modele relaciones uno a uno con documentos incrustados](modelo-de-datos/relaciones-entre-documentos/modele-relaciones-uno-a-uno-con-documentos-incrustados.md)
+  * [Modelar relaciones de uno a varios con documentos incrustados](modelo-de-datos/relaciones-entre-documentos/modelar-relaciones-de-uno-a-varios-con-documentos-incrustados.md)
+  * [Modelar relaciones de uno a varios con referencias de documentos](modelo-de-datos/relaciones-entre-documentos/modelar-relaciones-de-uno-a-varios-con-referencias-de-documentos.md)
+* [Estructura en Árbol](modelo-de-datos/estructura-en-arbol/README.md)
+  * [Modelo de estructuras de árbol con referencias principales](modelo-de-datos/estructura-en-arbol/modelo-de-estructuras-de-arbol-con-referencias-principales.md)
+  * [Modelo de estructuras de árbol  con referencias](modelo-de-datos/estructura-en-arbol/modelo-de-estructuras-de-arbol-con-referencias.md)
+  * [Modelo de estructuras de árbol  con una matriz de antepasados](modelo-de-datos/estructura-en-arbol/modelo-de-estructuras-de-arbol-con-una-matriz-de-antepasados.md)
+  * [Modelo de estructuras de árbol con rutas materializadas](modelo-de-datos/estructura-en-arbol/modelo-de-estructuras-de-arbol-con-rutas-materializadas.md)
+  * [Modelo de estructuras de árbol con conjuntos anidados](modelo-de-datos/estructura-en-arbol/modelo-de-estructuras-de-arbol-con-conjuntos-anidados.md)
 
 ## Transacciones
 
-* [Untitled](transacciones/untitled.md)
+* [Acerca de las transacciones](transacciones/untitled.md)
+* [Drivers API](transacciones/drivers-api.md)
+* [Consideraciones de producción](transacciones/consideraciones-de-produccion.md)
+* [Consideraciones de producción \(clústeres fragmentados\)](transacciones/consideraciones-de-produccion-clusteres-fragmentados.md)
+* [Transacciones y operaciones](transacciones/transacciones-y-operaciones.md)
 
 ## Indexación
 
