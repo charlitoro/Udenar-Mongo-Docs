@@ -63,7 +63,19 @@
 
 ## Indexación
 
-* [Untitled](indexacion/untitled.md)
+* [Índices](indexacion/untitled.md)
+* [Índices de campo único](indexacion/indices-de-campo-unico.md)
+* [Índices compuestos](indexacion/indices-compuestos.md)
+* [Índices Multikey](indexacion/indices-multikey/README.md)
+  * [Límites de índice de varias ciudades](indexacion/indices-multikey/limites-de-indice-de-varias-ciudades.md)
+
+---
+
+* [Índices de texto](indices-de-texto/README.md)
+  * [Especificar un idioma para el índice de texto](indices-de-texto/especificar-un-idioma-para-el-indice-de-texto.md)
+  * [Especificar el nombre del textíndice](indices-de-texto/especificar-el-nombre-del-textindice.md)
+  * [Controlar los resultados de la búsqueda con ponderaciones](indices-de-texto/controlar-los-resultados-de-la-busqueda-con-ponderaciones.md)
+  * [Limite el número de entradas escaneadas](indices-de-texto/limite-el-numero-de-entradas-escaneadas.md)
 
 ## Seguridad
 
