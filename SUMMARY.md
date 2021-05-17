@@ -68,16 +68,16 @@
 * [Índices compuestos](indexacion/indices-compuestos.md)
 * [Índices Multikey](indexacion/indices-multikey/README.md)
   * [Límites de índice de varias ciudades](indexacion/indices-multikey/limites-de-indice-de-varias-ciudades.md)
-
----
-
-* [Índices de texto](indices-de-texto/README.md)
-  * [Especificar un idioma para el índice de texto](indices-de-texto/especificar-un-idioma-para-el-indice-de-texto.md)
-  * [Especificar el nombre del textíndice](indices-de-texto/especificar-el-nombre-del-textindice.md)
-  * [Controlar los resultados de la búsqueda con ponderaciones](indices-de-texto/controlar-los-resultados-de-la-busqueda-con-ponderaciones.md)
-  * [Limite el número de entradas escaneadas](indices-de-texto/limite-el-numero-de-entradas-escaneadas.md)
+* [Índices de texto](indexacion/indices-de-texto/README.md)
+  * [Especificar un idioma para el índice de texto](indexacion/indices-de-texto/especificar-un-idioma-para-el-indice-de-texto.md)
+  * [Especificar el nombre del textíndice](indexacion/indices-de-texto/especificar-el-nombre-del-textindice.md)
+  * [Controlar los resultados de la búsqueda con ponderaciones](indexacion/indices-de-texto/controlar-los-resultados-de-la-busqueda-con-ponderaciones.md)
+  * [Limite el número de entradas escaneadas](indexacion/indices-de-texto/limite-el-numero-de-entradas-escaneadas.md)
 
 ## Seguridad
 
-* [Untitled](seguridad/untitled.md)
+* [Security checklist](seguridad/untitled.md)
+* [Enable access control](seguridad/enable-access-control.md)
+* [Authentication](seguridad/authentication.md)
+* [Role-based access control](seguridad/role-based-access-control.md)
 
