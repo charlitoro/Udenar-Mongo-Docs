@@ -17,15 +17,15 @@ Este documento proporciona una lista de medidas de seguridad que debe implementa
 #### ➤ Configurar el control de acceso basado en roles  <a id="arrow-configure-role-based-access-control"></a>
 
 * **Primero** cree un administrador de usuarios y luego cree usuarios adicionales. Cree un usuario de MongoDB único para cada persona / aplicación que acceda al sistema.
-* Siga el principio de privilegio mínimo. Cree roles que definan los derechos de acceso exactos que requiere un conjunto de usuarios. Luego cree usuarios y asígneles solo los roles que necesitan para realizar sus operaciones. Un usuario puede ser una persona o una aplicación cliente.NOTA
+* Siga el principio de privilegio mínimo. Cree roles que definan los derechos de acceso exactos que requiere un conjunto de usuarios. Luego cree usuarios y asígneles solo los roles que necesitan para realizar sus operaciones. Un usuario puede ser una persona o una aplicación cliente.
 
-  Un usuario puede tener privilegios en diferentes bases de datos. Si un usuario requiere privilegios en varias bases de datos, cree un único usuario con roles que otorguen los privilegios de base de datos aplicables en lugar de crear el usuario varias veces en diferentes bases de datos.  
+**NOTA:** _Un usuario puede tener privilegios en diferentes bases de datos. Si un usuario requiere privilegios en varias bases de datos, cree un único usuario con roles que otorguen los privilegios de base de datos aplicables en lugar de crear el usuario varias veces en diferentes bases de datos._  
 
 
-  Ver también:
+Ver también:
 
-  * [Control de acceso basado en roles](https://docs.mongodb.com/manual/core/authorization/)
-  * [Administrar usuarios y roles](https://docs.mongodb.com/manual/tutorial/manage-users-and-roles/)
+* [Control de acceso basado en roles](https://docs.mongodb.com/manual/core/authorization/)
+* [Administrar usuarios y roles](https://docs.mongodb.com/manual/tutorial/manage-users-and-roles/)
 
 #### ➤ Cifrar comunicación \(TLS / SSL\)  <a id="arrow-encrypt-communication--tls-ssl-"></a>
 
@@ -39,9 +39,7 @@ Este documento proporciona una lista de medidas de seguridad que debe implementa
   | Linux / BSD | OpenSSL |
   | Mac OS | Transporte seguro |
 
-  NOTA
-
-  A partir de la versión 4.0, MongoDB deshabilita la compatibilidad con el cifrado TLS 1.0 en sistemas donde TLS 1.1+ está disponible. Para obtener más detalles, consulte [Deshabilitar TLS 1.0](https://docs.mongodb.com/manual/release-notes/4.0/#std-label-4.0-disable-tls) .  
+  **NOTA:** _A partir de la versión 4.0, MongoDB deshabilita la compatibilidad con el cifrado TLS 1.0 en sistemas donde TLS 1.1+ está disponible. Para obtener más detalles, consulte_ [_Deshabilitar TLS 1.0_](https://docs.mongodb.com/manual/release-notes/4.0/#std-label-4.0-disable-tls) _._  
 
 
   Consulte también: [Configurar `mongod`y `mongos`para TLS / SSL](https://docs.mongodb.com/manual/tutorial/configure-ssl/) .
@@ -56,17 +54,17 @@ Este documento proporciona una lista de medidas de seguridad que debe implementa
 
 * Asegúrese de que MongoDB se ejecute en un entorno de red confiable y configure un firewall o grupos de seguridad para controlar el tráfico entrante y saliente para sus instancias de MongoDB.
 * Deshabilite el acceso raíz SSH directo.
-* Permita que solo los clientes de confianza accedan a las interfaces de red y los puertos en los que están disponibles las instancias de MongoDB.NOTA
+* Permita que solo los clientes de confianza accedan a las interfaces de red y los puertos en los que están disponibles las instancias de MongoDB.
 
-  A partir de MongoDB 3.6, binarios de MongoDB [`mongod`](https://docs.mongodb.com/manual/reference/program/mongod/#mongodb-binary-bin.mongod)y [`mongos`](https://docs.mongodb.com/manual/reference/program/mongos/#mongodb-binary-bin.mongos), se enlazan `localhost`de forma predeterminada. Desde las versiones 2.6 a 3.4 de MongoDB, solo los binarios de los paquetes oficiales de MongoDB RPM \(Red Hat, CentOS, Fedora Linux y derivados\) y DEB \(Debian, Ubuntu y derivados\) se vincularían `localhost`de forma predeterminada. Para obtener más información sobre este cambio, consulte [Cambios de compatibilidad de enlaces de Localhost](https://docs.mongodb.com/manual/release-notes/3.6-compatibility/#std-label-3.6-bind_ip-compatibility) .  
+**NOTA**: _A partir de MongoDB 3.6, binarios de MongoDB_ [_`mongod`_](https://docs.mongodb.com/manual/reference/program/mongod/#mongodb-binary-bin.mongod)_y_ [_`mongos`_](https://docs.mongodb.com/manual/reference/program/mongos/#mongodb-binary-bin.mongos)_, se enlazan `localhost`de forma predeterminada. Desde las versiones 2.6 a 3.4 de MongoDB, solo los binarios de los paquetes oficiales de MongoDB RPM \(Red Hat, CentOS, Fedora Linux y derivados\) y DEB \(Debian, Ubuntu y derivados\) se vincularían `localhost`de forma predeterminada. Para obtener más información sobre este cambio, consulte_ [_Cambios de compatibilidad de enlaces de Localhost_](https://docs.mongodb.com/manual/release-notes/3.6-compatibility/#std-label-3.6-bind_ip-compatibility) _._  
 
 
-  Ver también:
+Ver también:
 
-  * [Fortalecimiento de la red y la configuración](https://docs.mongodb.com/manual/core/security-hardening/)
-  * el [`net.bindIp`](https://docs.mongodb.com/manual/reference/configuration-options/#mongodb-setting-net.bindIp)ajuste de configuración
-  * el [`security.clusterIpSourceWhitelist`](https://docs.mongodb.com/manual/reference/configuration-options/#mongodb-setting-security.clusterIpSourceWhitelist)ajuste de configuración
-  * el campo [authenticationRestrictions](https://docs.mongodb.com/manual/reference/method/db.createUser/#std-label-db-createUser-authenticationRestrictions) al [`db.createUser()`](https://docs.mongodb.com/manual/reference/method/db.createUser/#mongodb-method-db.createUser)comando para especificar una lista blanca de IP por usuario.
+* [Fortalecimiento de la red y la configuración](https://docs.mongodb.com/manual/core/security-hardening/)
+* el [`net.bindIp`](https://docs.mongodb.com/manual/reference/configuration-options/#mongodb-setting-net.bindIp)ajuste de configuración
+* el [`security.clusterIpSourceWhitelist`](https://docs.mongodb.com/manual/reference/configuration-options/#mongodb-setting-security.clusterIpSourceWhitelist)ajuste de configuración
+* el campo [authenticationRestrictions](https://docs.mongodb.com/manual/reference/method/db.createUser/#std-label-db-createUser-authenticationRestrictions) al [`db.createUser()`](https://docs.mongodb.com/manual/reference/method/db.createUser/#mongodb-method-db.createUser)comando para especificar una lista blanca de IP por usuario.
 
 #### ➤ Actividad del sistema de auditoría  <a id="arrow-audit-system-activity"></a>
 

@@ -16,11 +16,9 @@ Para anular la versión predeterminada y especificar una versión diferente, inc
 
 ### Crear índice de texto  <a id="create-text-index"></a>
 
-IMPORTANTE
+**IMPORTANTE:** _Una colección puede tener como máximo **un** `text` índice._
 
-Una colección puede tener como máximo **un** `text` índice.
-
-Atlas Search \(disponible en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas?tck=docs_server) \) admite múltiples índices de búsqueda de texto completo en una sola colección. Para obtener más información, consulte la [documentación de Atlas Search](https://docs.atlas.mongodb.com/atlas-search/) .
+_Atlas Search \(disponible en_ [_MongoDB Atlas_](https://www.mongodb.com/cloud/atlas?tck=docs_server) _\) admite múltiples índices de búsqueda de texto completo en una sola colección. Para obtener más información, consulte la_ [_documentación de Atlas Search_](https://docs.atlas.mongodb.com/atlas-search/) _._
 
 Para crear un `text`índice, use el [`db.collection.createIndex()`](https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/#mongodb-method-db.collection.createIndex)método. Para indexar un campo que contiene una cadena o una matriz de elementos de cadena, incluya el campo y especifique el literal de cadena `"text"`en el documento de índice, como en el siguiente ejemplo:
 
@@ -31,7 +29,12 @@ db.reviews.createIndex( { comments: "text" } )
 Puede indexar varios campos para el `text`índice. El siguiente ejemplo crea un `text`índice en los campos `subject`y `comments`:
 
 ```text
-db.reviews.createIndex(   {     subject: "text",     comments: "text"   } )
+db.reviews.createIndex(
+   {
+     subject: "text",
+     comments: "text"
+   }
+ )
 ```
 
 Un [índice compuesto](https://docs.mongodb.com/manual/core/index-compound/) puede incluir `text` claves de índice en combinación con claves de índice ascendente / descendente. Para obtener más información, consulte [Índice compuesto](https://docs.mongodb.com/manual/core/index-text/#std-label-text-index-compound) .
@@ -50,11 +53,9 @@ Para obtener más información sobre el uso de ponderaciones para controlar los 
 
 #### Índices de texto comodín  <a id="wildcard-text-indexes"></a>
 
-NOTA
+**NOTA:** _Los índices de texto comodín son distintos de los_ [_índices comodín_](https://docs.mongodb.com/manual/core/index-wildcard/#std-label-wildcard-index-core) _. Los índices comodín no pueden admitir consultas mediante el_ [_`$text`_](https://docs.mongodb.com/manual/reference/operator/query/text/#mongodb-query-op.-text) _operador._
 
-Los índices de texto comodín son distintos de los [índices comodín](https://docs.mongodb.com/manual/core/index-wildcard/#std-label-wildcard-index-core) . Los índices comodín no pueden admitir consultas mediante el [`$text`](https://docs.mongodb.com/manual/reference/operator/query/text/#mongodb-query-op.-text) operador.
-
-Si bien los índices de texto comodín y los índices [comodín](https://docs.mongodb.com/manual/core/index-wildcard/#std-label-wildcard-index-core) comparten el `$**`patrón de campo comodín , son tipos de índices distintos. Solo los índices de texto comodín admiten el [`$text`](https://docs.mongodb.com/manual/reference/operator/query/text/#mongodb-query-op.-text)operador.
+_Si bien los índices de texto comodín y los índices_ [_comodín_](https://docs.mongodb.com/manual/core/index-wildcard/#std-label-wildcard-index-core) _comparten el `$**`patrón de campo comodín , son tipos de índices distintos. Solo los índices de texto comodín admiten el_ [_`$text`_](https://docs.mongodb.com/manual/reference/operator/query/text/#mongodb-query-op.-text)_operador._
 
 Al crear un `text`índice en varios campos, también puede utilizar el especificador comodín \( `$**`\). Con un índice de texto comodín, MongoDB indexa todos los campos que contienen datos de cadena para cada documento de la colección. El siguiente ejemplo crea un índice de texto utilizando el especificador comodín:
 

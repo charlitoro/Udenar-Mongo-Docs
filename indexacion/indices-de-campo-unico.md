@@ -2,14 +2,20 @@
 
 MongoDB proporciona soporte completo para índices en cualquier campo en una [colección](https://docs.mongodb.com/manual/reference/glossary/#std-term-collection) de [documentos](https://docs.mongodb.com/manual/reference/glossary/#std-term-document) . De forma predeterminada, todas las colecciones tienen un índice en el [campo \_id](https://docs.mongodb.com/manual/indexes/#std-label-index-type-id) , y las aplicaciones y los usuarios pueden agregar índices adicionales para admitir consultas y operaciones importantes.
 
-Este documento describe índices ascendentes / descendentes en un solo campo.![Diagrama de un &#xED;ndice en el campo \`\` puntuaci&#xF3;n &apos;&apos; \(ascendente\).](https://docs.mongodb.com/manual/images/index-ascending.bakedsvg.svg)
+Este documento describe índices ascendentes / descendentes en un solo campo.
+
+![](../.gitbook/assets/image%20%2812%29.png)
 
 ### Cree un índice ascendente en un solo campo  <a id="create-an-ascending-index-on-a-single-field"></a>
 
 Considere una colección nombrada `records`que contiene documentos que se parecen al siguiente documento de muestra:
 
 ```text
-{  "_id": ObjectId("570c04a4ad233577f97dc459"),  "score": 1034,  "location": { state: "NY", city: "New York" }}
+{
+  "_id": ObjectId("570c04a4ad233577f97dc459"),
+  "score": 1034,
+  "location": { state: "NY", city: "New York" }
+}
 ```
 
 La siguiente operación crea un índice ascendente en el `score` campo de la `records`colección:
@@ -23,7 +29,8 @@ El valor del campo en la especificación del índice describe el tipo de índice
 El índice creado admitirá consultas que se seleccionen en el campo `score`, como las siguientes:
 
 ```text
-db.records.find( { score: 2 } )db.records.find( { score: { $gt: 10 } } )
+db.records.find( { score: 2 } )
+db.records.find( { score: { $gt: 10 } } )
 ```
 
 ### Crear un índice en un campo incrustado  <a id="create-an-index-on-an-embedded-field"></a>
@@ -33,7 +40,11 @@ Puede crear índices en campos dentro de documentos incrustados, al igual que pu
 Considere una colección nombrada `records`que contiene documentos que se parecen al siguiente documento de muestra:
 
 ```text
-{  "_id": ObjectId("570c04a4ad233577f97dc459"),  "score": 1034,  "location": { state: "NY", city: "New York" }}
+{
+  "_id": ObjectId("570c04a4ad233577f97dc459"),
+  "score": 1034,
+  "location": { state: "NY", city: "New York" }
+}
 ```
 
 La siguiente operación crea un índice en el `location.state` campo:
@@ -45,7 +56,8 @@ db.records.createIndex( { "location.state": 1 } )
 El índice creado admitirá consultas que se seleccionen en el campo `location.state`, como las siguientes:
 
 ```text
-db.records.find( { "location.state": "CA" } )db.records.find( { "location.city": "Albany", "location.state": "NY" } )
+db.records.find( { "location.state": "CA" } )
+db.records.find( { "location.city": "Albany", "location.state": "NY" } )
 ```
 
 ### Crear un índice en un documento incrustado  <a id="create-an-index-on-embedded-document"></a>
@@ -55,7 +67,11 @@ También puede crear índices en el documento incrustado como un todo.
 Considere una colección nombrada `records`que contiene documentos que se parecen al siguiente documento de muestra:
 
 ```text
-{  "_id": ObjectId("570c04a4ad233577f97dc459"),  "score": 1034,  "location": { state: "NY", city: "New York" }}
+{
+  "_id": ObjectId("570c04a4ad233577f97dc459"),
+  "score": 1034,
+  "location": { state: "NY", city: "New York" }
+}
 ```
 
 El `location`campo es un documento incrustado, que contiene los campos incrustados `city`y `state`. El siguiente comando crea un índice en el `location` campo como un todo:
@@ -70,9 +86,7 @@ La siguiente consulta puede usar el índice en el `location`campo:
 db.records.find( { location: { city: "New York", state: "NY" } } )
 ```
 
-NOTA
-
-Aunque la consulta puede utilizar el índice, el conjunto de resultados no incluye el documento de muestra anterior. Al realizar coincidencias de igualdad en documentos incrustados, el orden de los campos es importante y los documentos incrustados deben coincidir exactamente. Consulte [Consultar documentos incrustados](https://docs.mongodb.com/manual/reference/method/db.collection.find/#std-label-query-embedded-documents) para obtener más información sobre la consulta de documentos incrustados.
+**NOTA:** _Aunque la consulta puede utilizar el índice, el conjunto de resultados no incluye el documento de muestra anterior. Al realizar coincidencias de igualdad en documentos incrustados, el orden de los campos es importante y los documentos incrustados deben coincidir exactamente. Consulte_ [_Consultar documentos incrustados_](https://docs.mongodb.com/manual/reference/method/db.collection.find/#std-label-query-embedded-documents) _para obtener más información sobre la consulta de documentos incrustados._
 
 ### Consideraciones adicionales  <a id="additional-considerations"></a>
 

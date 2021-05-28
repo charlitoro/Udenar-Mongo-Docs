@@ -13,7 +13,10 @@ Para especificar un idioma diferente, use la `default_language`opción al crear 
 El siguiente ejemplo crea para la `quotes`colección un `text` índice en el `content`campo y establece el `default_language`en `spanish`:
 
 ```text
-db.quotes.createIndex(   { content : "text" },   { default_language: "spanish" })
+db.quotes.createIndex(
+   { content : "text" },
+   { default_language: "spanish" }
+)
 ```
 
 ### Crear un `text`índice para una colección en varios idiomas  <a id="create-a-text-index-for-a-collection-in-multiple-languages"></a>
@@ -32,7 +35,47 @@ Consulte [Idiomas de búsqueda de texto](https://docs.mongodb.com/manual/referen
 Por ejemplo, una colección `quotes`contiene documentos en varios idiomas que incluyen el `language`campo en el documento y / o el documento incrustado según sea necesario:
 
 ```text
-{   _id: 1,   language: "portuguese",   original: "A sorte protege os audazes.",   translation:     [        {           language: "english",           quote: "Fortune favors the bold."        },        {           language: "spanish",           quote: "La suerte protege a los audaces."        }    ]}{   _id: 2,   language: "spanish",   original: "Nada hay más surrealista que la realidad.",   translation:      [        {          language: "english",          quote: "There is nothing more surreal than reality."        },        {          language: "french",          quote: "Il n'y a rien de plus surréaliste que la réalité."        }      ]}{   _id: 3,   original: "is this a dagger which I see before me.",   translation:   {      language: "spanish",      quote: "Es este un puñal que veo delante de mí."   }}
+{
+   _id: 1,
+   language: "portuguese",
+   original: "A sorte protege os audazes.",
+   translation:
+     [
+        {
+           language: "english",
+           quote: "Fortune favors the bold."
+        },
+        {
+           language: "spanish",
+           quote: "La suerte protege a los audaces."
+        }
+    ]
+}
+{
+   _id: 2,
+   language: "spanish",
+   original: "Nada hay más surrealista que la realidad.",
+   translation:
+      [
+        {
+          language: "english",
+          quote: "There is nothing more surreal than reality."
+        },
+        {
+          language: "french",
+          quote: "Il n'y a rien de plus surréaliste que la réalité."
+        }
+      ]
+}
+{
+   _id: 3,
+   original: "is this a dagger which I see before me.",
+   translation:
+   {
+      language: "spanish",
+      quote: "Es este un puñal que veo delante de mí."
+   }
+}
 ```
 
 Si crea un `text`índice en el `quote`campo con el idioma predeterminado de inglés.
@@ -57,12 +100,15 @@ Para utilizar un campo con un nombre distinto de `language`, incluya la `languag
 Por ejemplo, proporcione el siguiente comando para usarlo `idioma`como nombre de campo en lugar de `language`:
 
 ```text
-db.quotes.createIndex( { quote : "text" },                       { language_override: "idioma" } )
+db.quotes.createIndex( { quote : "text" },
+                       { language_override: "idioma" } )
 ```
 
 Los documentos de la `quotes`colección pueden especificar un idioma con el `idioma`campo:
 
 ```text
-{ _id: 1, idioma: "portuguese", quote: "A sorte protege os audazes" }{ _id: 2, idioma: "spanish", quote: "Nada hay más surrealista que la realidad." }{ _id: 3, idioma: "english", quote: "is this a dagger which I see before me" }
+{ _id: 1, idioma: "portuguese", quote: "A sorte protege os audazes" }
+{ _id: 2, idioma: "spanish", quote: "Nada hay más surrealista que la realidad." }
+{ _id: 3, idioma: "english", quote: "is this a dagger which I see before me" }
 ```
 

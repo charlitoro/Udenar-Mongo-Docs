@@ -1,6 +1,8 @@
 # Índices compuestos
 
-MongoDB admite _índices compuestos_ , donde una única estructura de índice contiene referencias a múltiples campos [\[ 1 \]](https://docs.mongodb.com/manual/core/index-compound/#footnote-compound-index-field-limit) dentro de los documentos de una colección. El siguiente diagrama ilustra un ejemplo de un índice compuesto en dos campos:![Diagrama de un &#xED;ndice compuesto en el campo \`\` userid &apos;&apos; \(ascendente\) y el campo \`\` score &apos;&apos; \(descendente\).  El &#xED;ndice ordena primero por el campo \`\` ID de usuario &apos;&apos; y luego por el campo \`\` puntuaci&#xF3;n &apos;&apos;.](https://docs.mongodb.com/manual/images/index-compound-key.bakedsvg.svg)
+MongoDB admite _índices compuestos_ , donde una única estructura de índice contiene referencias a múltiples campos [\[ 1 \]](https://docs.mongodb.com/manual/core/index-compound/#footnote-compound-index-field-limit) dentro de los documentos de una colección. El siguiente diagrama ilustra un ejemplo de un índice compuesto en dos campos:
+
+![](../.gitbook/assets/image%20%2813%29.png)
 
 | \[ [1](https://docs.mongodb.com/manual/core/index-compound/#ref-compound-index-field-limit-id1) \] | MongoDB impone un [`limit of 32 fields for any compound index`](https://docs.mongodb.com/manual/reference/limits/#mongodb-limit-Number-of-Indexed-Fields-in-a-Compound-Index). |
 | :--- | :--- |
@@ -16,22 +18,31 @@ Para crear un [índice compuesto,](https://docs.mongodb.com/manual/core/index-co
 db.collection.createIndex( { <field1>: <type>, <field2>: <type2>, ... } )
 ```
 
-El valor del campo en la especificación del índice describe el tipo de índice para ese campo. Por ejemplo, un valor de `1`especifica un índice que ordena los elementos en orden ascendente. Un valor de `-1`especifica un índice que ordena los elementos en orden descendente. Para tipos de índices adicionales, consulte [tipos de índices](https://docs.mongodb.com/manual/indexes/#std-label-index-types) .IMPORTANTE
+El valor del campo en la especificación del índice describe el tipo de índice para ese campo. Por ejemplo, un valor de `1`especifica un índice que ordena los elementos en orden ascendente. Un valor de `-1`especifica un índice que ordena los elementos en orden descendente. Para tipos de índices adicionales, consulte [tipos de índices](https://docs.mongodb.com/manual/indexes/#std-label-index-types) .
 
-A partir de MongoDB 4.4:
+**IMPORTANTE:**
 
-* Los índices compuestos pueden contener **un solo** [campo de índice hash](https://docs.mongodb.com/manual/core/index-hashed/) .
-* Recibirá un error si intenta crear un índice compuesto que contenga más de un [campo de índice hash](https://docs.mongodb.com/manual/core/index-hashed/) .
+_A partir de MongoDB 4.4:_
 
-En MongoDB 4.2 o anterior:
+* _Los índices compuestos pueden contener **un solo**_ [_campo de índice hash_](https://docs.mongodb.com/manual/core/index-hashed/) _._
+* _Recibirá un error si intenta crear un índice compuesto que contenga más de un_ [_campo de índice hash_](https://docs.mongodb.com/manual/core/index-hashed/) _._
 
-* Los índices compuestos **no** pueden contener un [campo de índice con hash](https://docs.mongodb.com/manual/core/index-hashed/) .
-* Recibirá un error si intenta crear un índice compuesto que contenga un [campo de índice hash](https://docs.mongodb.com/manual/core/index-hashed/) .
+_En MongoDB 4.2 o anterior:_
+
+* _Los índices compuestos **no** pueden contener un_ [_campo de índice con hash_](https://docs.mongodb.com/manual/core/index-hashed/) _._
+* _Recibirá un error si intenta crear un índice compuesto que contenga un_ [_campo de índice hash_](https://docs.mongodb.com/manual/core/index-hashed/) _._
 
 Considere una colección nombrada `products`que contiene documentos que se parecen al siguiente documento:
 
 ```text
-{ "_id": ObjectId(...), "item": "Banana", "category": ["food", "produce", "grocery"], "location": "4th Street Store", "stock": 4, "type": "cases"}
+{
+ "_id": ObjectId(...),
+ "item": "Banana",
+ "category": ["food", "produce", "grocery"],
+ "location": "4th Street Store",
+ "stock": 4,
+ "type": "cases"
+}
 ```
 
 La siguiente operación crea un índice ascendente en los campos `item`y `stock`:
@@ -45,7 +56,8 @@ El orden de los campos enumerados en un índice compuesto es importante. El índ
 Además de admitir consultas que coinciden en todos los campos de índice, los índices compuestos pueden admitir consultas que coinciden en el prefijo de los campos de índice. Es decir, los soportes del índice de consultas sobre el `item`terreno, así como tanto `item`y `stock`campos:
 
 ```text
-db.products.find( { item: "Banana" } )db.products.find( { item: "Banana", stock: { $gt: 5 } } )
+db.products.find( { item: "Banana" } )
+db.products.find( { item: "Banana", stock: { $gt: 5 } } )
 ```
 
 Para obtener más información, consulte [Prefijos](https://docs.mongodb.com/manual/core/index-compound/#std-label-compound-index-prefix) .

@@ -10,9 +10,9 @@ Básicamente, los índices en MongoDB son similares a los índices en otros sist
 
 ### `_id`Índice predeterminado  <a id="default-_id-index"></a>
 
-MongoDB crea un [índice único](https://docs.mongodb.com/manual/core/index-unique/#std-label-index-type-unique) en el campo [\_id](https://docs.mongodb.com/manual/core/document/#std-label-document-id-field) durante la creación de una colección. El `_id`índice evita que los clientes inserten dos documentos con el mismo valor para el `_id`campo. No puede colocar este índice en el `_id`campo.NOTA
+MongoDB crea un [índice único](https://docs.mongodb.com/manual/core/index-unique/#std-label-index-type-unique) en el campo [\_id](https://docs.mongodb.com/manual/core/document/#std-label-document-id-field) durante la creación de una colección. El `_id`índice evita que los clientes inserten dos documentos con el mismo valor para el `_id`campo. No puede colocar este índice en el `_id`campo.
 
-En [clústeres fragmentados](https://docs.mongodb.com/manual/reference/glossary/#std-term-sharded-cluster) , si _no_ usa el `_id`campo como [clave de fragmento](https://docs.mongodb.com/manual/reference/glossary/#std-term-shard-key) , su aplicación **debe** garantizar la unicidad de los valores en el `_id`campo para evitar errores. Esto se hace con mayor frecuencia mediante el uso de un [ObjectId](https://docs.mongodb.com/manual/reference/glossary/#std-term-ObjectId) estándar generado automáticamente .
+**NOTA:** _En_ [_clústeres fragmentados_](https://docs.mongodb.com/manual/reference/glossary/#std-term-sharded-cluster) _, si no usa el `_id`campo como_ [_clave de fragmento_](https://docs.mongodb.com/manual/reference/glossary/#std-term-shard-key) _, su aplicación **debe** garantizar la unicidad de los valores en el `_id`campo para evitar errores. Esto se hace con mayor frecuencia mediante el uso de un_ [_ObjectId_](https://docs.mongodb.com/manual/reference/glossary/#std-term-ObjectId) _estándar generado automáticamente ._
 
 ### Crear un índice  <a id="create-an-index"></a>
 
@@ -43,7 +43,10 @@ El nombre predeterminado para un índice es la concatenación de las claves inde
 Puede crear índices con un nombre personalizado, como uno que sea más legible por humanos que el predeterminado. Por ejemplo, considere una aplicación que consulta con frecuencia la `products`colección para completar datos en el inventario existente. El siguiente [`createIndex()`](https://docs.mongodb.com/manual/reference/method/db.collection.createIndex/#mongodb-method-db.collection.createIndex) método crea un índice `item`y se `quantity`nombra `query for inventory`:
 
 ```text
-db.products.createIndex(  { item: 1, quantity: -1 } ,  { name: "query for inventory" })
+db.products.createIndex(
+  { item: 1, quantity: -1 } ,
+  { name: "query for inventory" }
+)
 ```
 
 Puede ver los nombres de los índices utilizando el [`db.collection.getIndexes()`](https://docs.mongodb.com/manual/reference/method/db.collection.getIndexes/#mongodb-method-db.collection.getIndexes) método. No puede cambiar el nombre de un índice una vez creado. En su lugar, debe eliminar y volver a crear el índice con un nombre nuevo.
@@ -54,7 +57,9 @@ MongoDB proporciona varios tipos de índices diferentes para admitir tipos espec
 
 #### Campo único  <a id="single-field"></a>
 
-Además del `_id`índice definido por MongoDB, MongoDB admite la creación de índices ascendentes / descendentes definidos por el usuario en un [solo campo de un documento](https://docs.mongodb.com/manual/core/index-single/) .![Diagrama de un &#xED;ndice en el campo \`\` puntuaci&#xF3;n &apos;&apos; \(ascendente\).](https://docs.mongodb.com/manual/images/index-ascending.bakedsvg.svg)
+Además del `_id`índice definido por MongoDB, MongoDB admite la creación de índices ascendentes / descendentes definidos por el usuario en un [solo campo de un documento](https://docs.mongodb.com/manual/core/index-single/) .
+
+![](../.gitbook/assets/image%20%2811%29.png)
 
 Para un índice de un solo campo y operaciones de clasificación, el orden de clasificación \(es decir, ascendente o descendente\) de la clave de índice no importa porque MongoDB puede atravesar el índice en cualquier dirección.
 
@@ -64,7 +69,9 @@ Consulte [Índices de campo único](https://docs.mongodb.com/manual/core/index-s
 
 MongoDB también admite índices definidos por el usuario en varios campos, es decir [, índices compuestos](https://docs.mongodb.com/manual/core/index-compound/) .
 
-El orden de los campos enumerados en un índice compuesto tiene importancia. Por ejemplo, si un índice compuesto consta de `{ userid: 1, score: -1 }`, el índice ordena primero por `userid`y luego, dentro de cada `userid` valor, ordena por `score`.![Diagrama de un &#xED;ndice compuesto en el campo \`\` userid &apos;&apos; \(ascendente\) y el campo \`\` score &apos;&apos; \(descendente\).  El &#xED;ndice ordena primero por el campo \`\` ID de usuario &apos;&apos; y luego por el campo \`\` puntuaci&#xF3;n &apos;&apos;.](https://docs.mongodb.com/manual/images/index-compound-key.bakedsvg.svg)
+El orden de los campos enumerados en un índice compuesto tiene importancia. Por ejemplo, si un índice compuesto consta de `{ userid: 1, score: -1 }`, el índice ordena primero por `userid`y luego, dentro de cada `userid` valor, ordena por `score`.
+
+![](../.gitbook/assets/image%20%288%29.png)
 
 Para índices compuestos y operaciones de clasificación, el orden de clasificación \(es decir, ascendente o descendente\) de las claves de índice puede determinar si el índice puede admitir una operación de clasificación. Consulte [Orden de clasificación](https://docs.mongodb.com/manual/core/index-compound/#std-label-index-ascending-and-descending) para obtener más información sobre el impacto del orden de índice en los resultados de los índices compuestos.
 
@@ -72,7 +79,9 @@ Consulte [Índices compuestos](https://docs.mongodb.com/manual/core/index-compou
 
 #### Índice Multikey  <a id="multikey-index"></a>
 
-MongoDB utiliza [índices de varias claves](https://docs.mongodb.com/manual/core/index-multikey/) para indexar el contenido almacenado en matrices. Si indexa un campo que contiene un valor de matriz, MongoDB crea entradas de índice independientes para _cada_ elemento de la matriz. Estos [índices de varias claves](https://docs.mongodb.com/manual/core/index-multikey/) permiten que las consultas seleccionen documentos que contienen matrices haciendo coincidir el elemento o elementos de las matrices. MongoDB determina automáticamente si se debe crear un índice de varias claves si el campo indexado contiene un valor de matriz; no es necesario especificar explícitamente el tipo de múltiples claves.![Diagrama de un &#xED;ndice de varias claves en el campo \`\` addr.zip &apos;&apos;.  El campo \`\` addr &apos;&apos; contiene una serie de documentos de direcci&#xF3;n.  Los documentos de direcci&#xF3;n contienen el campo \`\` zip &apos;&apos;.](https://docs.mongodb.com/manual/images/index-multikey.bakedsvg.svg)
+MongoDB utiliza [índices de varias claves](https://docs.mongodb.com/manual/core/index-multikey/) para indexar el contenido almacenado en matrices. Si indexa un campo que contiene un valor de matriz, MongoDB crea entradas de índice independientes para _cada_ elemento de la matriz. Estos [índices de varias claves](https://docs.mongodb.com/manual/core/index-multikey/) permiten que las consultas seleccionen documentos que contienen matrices haciendo coincidir el elemento o elementos de las matrices. MongoDB determina automáticamente si se debe crear un índice de varias claves si el campo indexado contiene un valor de matriz; no es necesario especificar explícitamente el tipo de múltiples claves.
+
+![](../.gitbook/assets/image%20%2815%29.png)
 
 Consulte [Índices de múltiples claves](https://docs.mongodb.com/manual/core/index-multikey/) y [Límites](https://docs.mongodb.com/manual/core/multikey-index-bounds/) de índices de múltiples claves para obtener más información sobre los índices de múltiples claves.
 
@@ -167,13 +176,16 @@ Para un índice compuesto donde las claves de prefijo de índice no son cadenas,
 Por ejemplo, la colección `myColl`tiene un índice compuesto sobre los campos numéricos `score`y `price`y el campo de cadena `category`; el índice se crea con la configuración regional de intercalación `"fr"`para las comparaciones de cadenas:
 
 ```text
-db.myColl.createIndex(   { score: 1, price: 1, category: 1 },   { collation: { locale: "fr" } } )
+db.myColl.createIndex(
+   { score: 1, price: 1, category: 1 },
+   { collation: { locale: "fr" } } )
 ```
 
 Las siguientes operaciones, que utilizan la `"simple"`intercalación binaria para las comparaciones de cadenas, pueden utilizar el índice:
 
 ```text
-db.myColl.find( { score: 5 } ).sort( { price: 1 } )db.myColl.find( { score: 5, price: { $gt: NumberDecimal( "10" ) } } ).sort( { price: 1 } )
+db.myColl.find( { score: 5 } ).sort( { price: 1 } )
+db.myColl.find( { score: 5, price: { $gt: NumberDecimal( "10" ) } } ).sort( { price: 1 } )
 ```
 
 La siguiente operación, que usa la `"simple"`intercalación binaria para las comparaciones de cadenas en el `category`campo indexado , puede usar el índice para completar solo la `score: 5`parte de la consulta:
@@ -192,7 +204,9 @@ Los siguientes índices solo admiten la comparación binaria simple y no admiten
 
 ### Consultas cubiertas  <a id="covered-queries"></a>
 
-Cuando los criterios de consulta y la [proyección](https://docs.mongodb.com/manual/reference/glossary/#std-term-projection) de una consulta incluyen _solo_ los campos indexados, MongoDB devuelve los resultados directamente del índice _sin_ escanear ningún documento ni traer documentos a la memoria. Estas consultas cubiertas pueden ser _muy_ eficientes.![Diagrama de una consulta que usa solo el &#xED;ndice para coincidir con los criterios de la consulta y devolver los resultados.  MongoDB no necesita inspeccionar datos fuera del &#xED;ndice para completar la consulta.](https://docs.mongodb.com/manual/images/index-for-covered-query.bakedsvg.svg)
+Cuando los criterios de consulta y la [proyección](https://docs.mongodb.com/manual/reference/glossary/#std-term-projection) de una consulta incluyen _solo_ los campos indexados, MongoDB devuelve los resultados directamente del índice _sin_ escanear ningún documento ni traer documentos a la memoria. Estas consultas cubiertas pueden ser _muy_ eficientes.
+
+![](../.gitbook/assets/image%20%2810%29.png)
 
 Para obtener más información sobre consultas cubiertas, consulte [Consulta cubierta](https://docs.mongodb.com/manual/core/query-optimization/#std-label-read-operations-covered-query) .
 

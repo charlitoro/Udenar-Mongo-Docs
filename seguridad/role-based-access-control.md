@@ -34,9 +34,9 @@ Puede ver los privilegios de un rol emitiendo el [`rolesInfo`](https://docs.mong
 
 Puede asignar roles a los usuarios durante la creación de usuarios. También puede actualizar los usuarios existentes para otorgar o revocar roles. Para obtener una lista completa de los métodos de administración de usuarios, consulte [Administración de usuarios](https://docs.mongodb.com/manual/reference/method/#std-label-user-management-methods)
 
-Un usuario asignado a un rol recibe todos los privilegios de ese rol. Un usuario puede tener múltiples roles. Al asignar roles de usuario en varias bases de datos, un usuario creado en una base de datos puede tener permisos para actuar en otras bases de datos.NOTA
+Un usuario asignado a un rol recibe todos los privilegios de ese rol. Un usuario puede tener múltiples roles. Al asignar roles de usuario en varias bases de datos, un usuario creado en una base de datos puede tener permisos para actuar en otras bases de datos.
 
-El primer usuario creado en la base de datos debe ser un administrador de usuarios que tenga privilegios para administrar a otros usuarios. Consulte [Habilitar control de acceso](https://docs.mongodb.com/manual/tutorial/enable-authentication/) .
+**NOTA:** _El primer usuario creado en la base de datos debe ser un administrador de usuarios que tenga privilegios para administrar a otros usuarios. Consulte_ [_Habilitar control de acceso_](https://docs.mongodb.com/manual/tutorial/enable-authentication/) _._
 
 ### Roles integrados y roles definidos por el usuario  <a id="built-in-roles-and-user-defined-roles"></a>
 

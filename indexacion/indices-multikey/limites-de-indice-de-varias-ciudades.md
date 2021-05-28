@@ -11,7 +11,8 @@ Dado un campo de matriz [indexado](https://docs.mongodb.com/manual/core/index-mu
 Por ejemplo, una colección `survey`contiene documentos con un campo `item`y un campo de matriz `ratings`:
 
 ```text
-{ _id: 1, item: "ABC", ratings: [ 2, 9 ] }{ _id: 2, item: "XYZ", ratings: [ 4, 3 ] }
+{ _id: 1, item: "ABC", ratings: [ 2, 9 ] }
+{ _id: 2, item: "XYZ", ratings: [ 4, 3 ] }
 ```
 
 Cree un [índice de varias claves](https://docs.mongodb.com/manual/core/index-multikey/#std-label-index-type-multikey) en la `ratings` matriz:
@@ -60,7 +61,8 @@ Si MongoDB no puede componer los dos límites, MongoDB siempre restringe el esca
 Considere un índice compuesto de varias cuñas; es decir, un [índice compuesto](https://docs.mongodb.com/manual/core/index-compound/#std-label-index-type-compound) donde uno de los campos indexados es una matriz. Por ejemplo, una colección `survey`contiene documentos con un campo `item`y un campo de matriz `ratings`:
 
 ```text
-{ _id: 1, item: "ABC", ratings: [ 2, 9 ] }{ _id: 2, item: "XYZ", ratings: [ 4, 3 ] }
+{ _id: 1, item: "ABC", ratings: [ 2, 9 ] }
+{ _id: 2, item: "XYZ", ratings: [ 4, 3 ] }
 ```
 
 Cree un [índice compuesto](https://docs.mongodb.com/manual/core/index-compound/#std-label-index-type-compound) en el `item` campo y el `ratings`campo:
@@ -115,7 +117,8 @@ MongoDB se cruzará los límites de `item`a `[ [ "L", "Z" ] ]` y clasificaciones
 Para otro ejemplo, considere dónde pertenecen los campos escalares a un documento anidado. Por ejemplo, una colección `survey`contiene los siguientes documentos:
 
 ```text
-{ _id: 1, item: { name: "ABC", manufactured: 2016 }, ratings: [ 2, 9 ] }{ _id: 2, item: { name: "XYZ", manufactured: 2013 },  ratings: [ 4, 3 ] }
+{ _id: 1, item: { name: "ABC", manufactured: 2016 }, ratings: [ 2, 9 ] }
+{ _id: 2, item: { name: "XYZ", manufactured: 2013 },  ratings: [ 4, 3 ] }
 ```
 
 Crear un índice compuesto multicircuito en los campos escalares `"item.name"`, `"item.manufactured"`y el campo de matriz `ratings`:
@@ -127,7 +130,10 @@ db.survey.createIndex( { "item.name": 1, "item.manufactured": 1, ratings: 1 } )
 Considere la siguiente operación que especifica predicados de consulta en los campos escalares:
 
 ```text
-db.survey.find( {   "item.name": "L" ,   "item.manufactured": 2012} )
+db.survey.find( {
+   "item.name": "L" ,
+   "item.manufactured": 2012
+} )
 ```
 
 Para esta consulta, MongoDB puede usar los límites combinados de:
@@ -157,7 +163,16 @@ El nombre del campo con puntos para el `score`campo es `"ratings.score"`.
 Considere que una colección `survey2`contiene documentos con un campo `item`y un campo de matriz `ratings`:
 
 ```text
-{  _id: 1,  item: "ABC",  ratings: [ { score: 2, by: "mn" }, { score: 9, by: "anon" } ]}{  _id: 2,  item: "XYZ",  ratings: [ { score: 5, by: "anon" }, { score: 7, by: "wv" } ]}
+{
+  _id: 1,
+  item: "ABC",
+  ratings: [ { score: 2, by: "mn" }, { score: 9, by: "anon" } ]
+}
+{
+  _id: 2,
+  item: "XYZ",
+  ratings: [ { score: 5, by: "anon" }, { score: 7, by: "wv" } ]
+}
 ```
 
 Cree un [índice compuesto](https://docs.mongodb.com/manual/core/index-compound/#std-label-index-type-compound) en el campo que no sea de matriz `item`, así como dos campos de una matriz `ratings.score`y `ratings.by`:
@@ -181,13 +196,21 @@ Tomando los predicados por separado:
 MongoDB puede agravar los límites para la `item`llave con _cualquiera_ de los límites para `"ratings.score"`o de los límites para `"ratings.by"`, dependiendo de los predicados de consulta y los valores de clave de índice. MongoDB no garantiza los límites que componen con el `item` campo. Por ejemplo, MongoDB elegirá componer los `item`límites con los `"ratings.score"`límites:
 
 ```text
-{  "item" : [ [ "XYZ", "XYZ" ] ],  "ratings.score" : [ [ -Infinity, 5 ] ],  "ratings.by" : [ [ MinKey, MaxKey ] ]}
+{
+  "item" : [ [ "XYZ", "XYZ" ] ],
+  "ratings.score" : [ [ -Infinity, 5 ] ],
+  "ratings.by" : [ [ MinKey, MaxKey ] ]
+}
 ```
 
 O, MongoDB puede optar por componer los `item`límites con `"ratings.by"`límites:
 
 ```text
-{  "item" : [ [ "XYZ", "XYZ" ] ],  "ratings.score" : [ [ MinKey, MaxKey ] ],  "ratings.by" : [ [ "anon", "anon" ] ]}
+{
+  "item" : [ [ "XYZ", "XYZ" ] ],
+  "ratings.score" : [ [ MinKey, MaxKey ] ],
+  "ratings.by" : [ [ "anon", "anon" ] ]
+}
 ```
 
 Sin embargo, para componer los límites para `"ratings.score"`con los límites para `"ratings.by"`, la consulta debe usar [`$elemMatch`](https://docs.mongodb.com/manual/reference/operator/query/elemMatch/#mongodb-query-op.-elemMatch). Consulte [Límites compuestos de campos de índice de una matriz](https://docs.mongodb.com/manual/core/multikey-index-bounds/#std-label-compound-fields-from-array) para obtener más información.
@@ -235,7 +258,10 @@ db.survey2.find( { "ratings.score": { $lte: 5 }, "ratings.by": "anon" } )
 Debido a que un solo documento incrustado en la matriz no necesita cumplir ambos criterios, MongoDB _no_ agrava los límites. Cuando se usa un índice compuesto, si MongoDB no puede restringir todos los campos del índice, MongoDB siempre restringe el campo inicial del índice, en este caso `"ratings.score"`:
 
 ```text
-{  "ratings.score": [ [ -Infinity, 5 ] ],  "ratings.by": [ [ MinKey, MaxKey ] ]}
+{
+  "ratings.score": [ [ -Infinity, 5 ] ],
+  "ratings.by": [ [ MinKey, MaxKey ] ]
+}
 ```
 
 **$elemMatchen ruta incompleta** 
@@ -245,7 +271,17 @@ Si la consulta no especifica [`$elemMatch`](https://docs.mongodb.com/manual/refe
 Por ejemplo, una colección `survey3`contiene documentos con un campo `item`y un campo de matriz `ratings`:
 
 ```text
-{  _id: 1,  item: "ABC",  ratings: [ { scores: [ { q1: 2, q2: 4 }, { q1: 3, q2: 8 } ], loc: "A" },             { scores: [ { q1: 2, q2: 5 } ], loc: "B" } ]}{  _id: 2,  item: "XYZ",  ratings: [ { scores: [ { q1: 7 }, { q1: 2, q2: 8 } ], loc: "B" } ]}
+{
+  _id: 1,
+  item: "ABC",
+  ratings: [ { scores: [ { q1: 2, q2: 4 }, { q1: 3, q2: 8 } ], loc: "A" },
+             { scores: [ { q1: 2, q2: 5 } ], loc: "B" } ]
+}
+{
+  _id: 2,
+  item: "XYZ",
+  ratings: [ { scores: [ { q1: 7 }, { q1: 2, q2: 8 } ], loc: "B" } ]
+}
 ```
 
 Cree un [índice compuesto](https://docs.mongodb.com/manual/core/index-compound/#std-label-index-type-compound) en `ratings.scores.q1`los `ratings.scores.q2`campos y:

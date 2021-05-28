@@ -1,6 +1,8 @@
 # Índices Multikey
 
-Para indexar un campo que contiene un valor de matriz, MongoDB crea una clave de índice para cada elemento de la matriz. Estos índices de _varias claves_ admiten consultas eficientes contra campos de matriz. Los índices de varias claves se pueden construir sobre matrices que contienen tanto valores escalares [\[ 1 \]](https://docs.mongodb.com/manual/core/index-multikey/#footnote-scalar) \(por ejemplo, cadenas, números\) _como_ documentos anidados.![Diagrama de un &#xED;ndice de varias claves en el campo \`\` addr.zip &apos;&apos;.  El campo \`\` addr &apos;&apos; contiene una serie de documentos de direcci&#xF3;n.  Los documentos de direcci&#xF3;n contienen el campo \`\` zip &apos;&apos;.](https://docs.mongodb.com/manual/images/index-multikey.bakedsvg.svg)
+Para indexar un campo que contiene un valor de matriz, MongoDB crea una clave de índice para cada elemento de la matriz. Estos índices de _varias claves_ admiten consultas eficientes contra campos de matriz. Los índices de varias claves se pueden construir sobre matrices que contienen tanto valores escalares [\[ 1 \]](https://docs.mongodb.com/manual/core/index-multikey/#footnote-scalar) \(por ejemplo, cadenas, números\) _como_ documentos anidados.
+
+![](../../.gitbook/assets/image%20%2814%29.png)
 
 | \[ [1](https://docs.mongodb.com/manual/core/index-multikey/#ref-scalar-id1) \] | Un valor escalar se refiere a un valor que no es ni un documento incrustado ni una matriz. |
 | :--- | :--- |
@@ -50,26 +52,30 @@ Para un índice [compuesto de](https://docs.mongodb.com/manual/core/index-compou
 
   Considere una colección que contiene los siguientes documentos:
 
-  ```text
-  { _id: 1, a: [1, 2], b: 1, category: "A array" }{ _id: 2, a: 1, b: [1, 2], category: "B array" }
-  ```
+```text
+{ _id: 1, a: [1, 2], b: 1, category: "A array" }
+{ _id: 2, a: 1, b: [1, 2], category: "B array" }
+```
 
-  Se permite un índice compuesto de múltiples claves `{ a: 1, b: 1 }`ya que para cada documento, solo un campo indexado por el índice compuesto de múltiples claves es una matriz; es decir, ningún documento contiene valores de matriz para los campos `a` y `b`.
+Se permite un índice compuesto de múltiples claves `{ a: 1, b: 1 }`ya que para cada documento, solo un campo indexado por el índice compuesto de múltiples claves es una matriz; es decir, ningún documento contiene valores de matriz para los campos `a` y `b`.
 
-  Sin embargo, después de crear el índice compuesto de varias claves, si intenta insertar un documento donde ambos campos `a`y `b`son matrices, MongoDB fallará la inserción.
+Sin embargo, después de crear el índice compuesto de varias claves, si intenta insertar un documento donde ambos campos `a`y `b`son matrices, MongoDB fallará la inserción.
 
 Si un campo es una matriz de documentos, puede indexar los campos incrustados para crear un índice compuesto. Por ejemplo, considere una colección que contiene los siguientes documentos:
 
 ```text
-{ _id: 1, a: [ { x: 5, z: [ 1, 2 ] }, { z: [ 1, 2 ] } ] }{ _id: 2, a: [ { x: 5 }, { z: 4 } ] }
+{ _id: 1, a: [ { x: 5, z: [ 1, 2 ] }, { z: [ 1, 2 ] } ] }
+{ _id: 2, a: [ { x: 5 }, { z: 4 } ] }
 ```
 
 Puede crear un índice compuesto en `{ "a.x": 1, "a.z": 1 }`. También se aplica la restricción en la que _como máximo_ un campo indexado puede ser una matriz.
 
-Para obtener un ejemplo, consulte [Matrices de índice con documentos incrustados](https://docs.mongodb.com/manual/core/index-multikey/#std-label-multikey-embedded-documents) .CONSEJOVer también:
+Para obtener un ejemplo, consulte [Matrices de índice con documentos incrustados](https://docs.mongodb.com/manual/core/index-multikey/#std-label-multikey-embedded-documents) .
 
-* [Restricción única en documentos separados](https://docs.mongodb.com/manual/core/index-unique/#std-label-unique-separate-documents)
-* [Índice único en un solo campo](https://docs.mongodb.com/manual/core/index-unique/#std-label-index-unique-index)
+**CONSEJO:** _**Ver también:**_
+
+* _\*\*\*\*_[_Restricción única en documentos separados_](https://docs.mongodb.com/manual/core/index-unique/#std-label-unique-separate-documents)\_\_
+* \_\_[_Índice único en un solo campo_](https://docs.mongodb.com/manual/core/index-unique/#std-label-index-unique-index)\_\_
 
 #### Ordenar  <a id="sorting"></a>
 
@@ -104,7 +110,11 @@ Cuando un filtro de consulta especifica una [coincidencia exacta para una matriz
 Por ejemplo, considere una `inventory`colección que contiene los siguientes documentos:
 
 ```text
-{ _id: 5, type: "food", item: "aaa", ratings: [ 5, 8, 9 ] }{ _id: 6, type: "food", item: "bbb", ratings: [ 5, 9 ] }{ _id: 7, type: "food", item: "ccc", ratings: [ 9, 5, 8 ] }{ _id: 8, type: "food", item: "ddd", ratings: [ 9, 5 ] }{ _id: 9, type: "food", item: "eee", ratings: [ 5, 9, 5 ] }
+{ _id: 5, type: "food", item: "aaa", ratings: [ 5, 8, 9 ] }
+{ _id: 6, type: "food", item: "bbb", ratings: [ 5, 9 ] }
+{ _id: 7, type: "food", item: "ccc", ratings: [ 9, 5, 8 ] }
+{ _id: 8, type: "food", item: "ddd", ratings: [ 9, 5 ] }
+{ _id: 9, type: "food", item: "eee", ratings: [ 5, 9, 5 ] }
 ```
 
 La colección tiene un índice de varias claves en el `ratings`campo:
@@ -161,7 +171,36 @@ Puede crear índices de varias claves en campos de matriz que contienen objetos 
 Considere una `inventory`colección con documentos de la siguiente forma:
 
 ```text
-{  _id: 1,  item: "abc",  stock: [    { size: "S", color: "red", quantity: 25 },    { size: "S", color: "blue", quantity: 10 },    { size: "M", color: "blue", quantity: 50 }  ]}{  _id: 2,  item: "def",  stock: [    { size: "S", color: "blue", quantity: 20 },    { size: "M", color: "blue", quantity: 5 },    { size: "M", color: "black", quantity: 10 },    { size: "L", color: "red", quantity: 2 }  ]}{  _id: 3,  item: "ijk",  stock: [    { size: "M", color: "blue", quantity: 15 },    { size: "L", color: "blue", quantity: 100 },    { size: "L", color: "red", quantity: 25 }  ]}...
+{
+  _id: 1,
+  item: "abc",
+  stock: [
+    { size: "S", color: "red", quantity: 25 },
+    { size: "S", color: "blue", quantity: 10 },
+    { size: "M", color: "blue", quantity: 50 }
+  ]
+}
+{
+  _id: 2,
+  item: "def",
+  stock: [
+    { size: "S", color: "blue", quantity: 20 },
+    { size: "M", color: "blue", quantity: 5 },
+    { size: "M", color: "black", quantity: 10 },
+    { size: "L", color: "red", quantity: 2 }
+  ]
+}
+{
+  _id: 3,
+  item: "ijk",
+  stock: [
+    { size: "M", color: "blue", quantity: 15 },
+    { size: "L", color: "blue", quantity: 100 },
+    { size: "L", color: "red", quantity: 25 }
+  ]
+}
+
+...
 ```
 
 La siguiente operación crea un índice de varias claves en los campos `stock.size` y `stock.quantity`:
@@ -173,7 +212,8 @@ db.inventory.createIndex( { "stock.size": 1, "stock.quantity": 1 } )
 El índice compuesto de varias claves puede admitir consultas con predicados que incluyen tanto campos indexados como predicados que solo incluyen el prefijo del índice `"stock.size"`, como en los siguientes ejemplos:
 
 ```text
-db.inventory.find( { "stock.size": "M" } )db.inventory.find( { "stock.size": "S", "stock.quantity": { $gt: 20 } } )
+db.inventory.find( { "stock.size": "M" } )
+db.inventory.find( { "stock.size": "S", "stock.quantity": { $gt: 20 } } )
 ```
 
 Para obtener detalles sobre cómo MongoDB puede combinar límites de índice de múltiples claves, consulte [Límites de índice de múltiples claves](https://docs.mongodb.com/manual/core/multikey-index-bounds/) . Para obtener más información sobre el comportamiento de índices compuestos y prefijos, consulte [índices compuestos y prefijos](https://docs.mongodb.com/manual/core/index-compound/#std-label-compound-index-prefix) .
@@ -181,7 +221,8 @@ Para obtener detalles sobre cómo MongoDB puede combinar límites de índice de 
 El índice compuesto de varias claves también puede admitir operaciones de ordenación, como los siguientes ejemplos:
 
 ```text
-db.inventory.find( ).sort( { "stock.size": 1, "stock.quantity": 1 } )db.inventory.find( { "stock.size": "M" } ).sort( { "stock.quantity": 1 } )
+db.inventory.find( ).sort( { "stock.size": 1, "stock.quantity": 1 } )
+db.inventory.find( { "stock.size": "M" } ).sort( { "stock.quantity": 1 } )
 ```
 
 Para obtener más información sobre el comportamiento de los índices compuestos y las operaciones de ordenación, consulte [Usar índices para ordenar los resultados de la consulta](https://docs.mongodb.com/manual/tutorial/sort-results-with-indexes/) .
