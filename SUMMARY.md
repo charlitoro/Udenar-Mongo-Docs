@@ -76,8 +76,8 @@
 
 ## Seguridad
 
-* [Security checklist](seguridad/untitled.md)
-* [Enable access control](seguridad/enable-access-control.md)
-* [Authentication](seguridad/authentication.md)
-* [Role-based access control](seguridad/role-based-access-control.md)
+* [Lista de verificación de seguridad](seguridad/untitled.md)
+* [Habilitar el control de acceso](seguridad/enable-access-control.md)
+* [Autenticación](seguridad/authentication.md)
+* [Control de acceso basado en roles](seguridad/role-based-access-control.md)
 
