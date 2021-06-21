@@ -74,6 +74,26 @@
   * [Controlar los resultados de la búsqueda con ponderaciones](indexacion/indices-de-texto/controlar-los-resultados-de-la-busqueda-con-ponderaciones.md)
   * [Limite el número de entradas escaneadas](indexacion/indices-de-texto/limite-el-numero-de-entradas-escaneadas.md)
 
+---
+
+* [Índices comodín](indices-comodin/README.md)
+  * [Restricciones del índice de comodines](indices-comodin/restricciones-del-indice-de-comodines.md)
+* [Índices 2dsphere](indices-2dsphere/README.md)
+  * [Consultar un 2dsphereíndice](indices-2dsphere/consultar-un-2dsphereindice.md)
+* [Índices 2d](indices-2d/README.md)
+  * [Crear un índice 2d](indices-2d/crear-un-indice-2d.md)
+  * [Consultar un índice 2d](indices-2d/consultar-un-indice-2d.md)
+  * [Elementos internos del índice 2d](indices-2d/elementos-internos-del-indice-2d.md)
+  * [Calcular la distancia usando geometría esférica](indices-2d/calcular-la-distancia-usando-geometria-esferica.md)
+* [Índices geoHaystack](indices-geohaystack/README.md)
+  * [Crear un índice de pajar](indices-geohaystack/crear-un-indice-de-pajar.md)
+  * [Consultar un índice de Haystack](indices-geohaystack/consultar-un-indice-de-haystack.md)
+* [Índices hash](indices-hash.md)
+* [Propiedades del índice](propiedades-del-indice/README.md)
+  * [Índices TTL](propiedades-del-indice/indices-ttl/README.md)
+    * [Caducar datos de colecciones configurando TTL](propiedades-del-indice/indices-ttl/caducar-datos-de-colecciones-configurando-ttl.md)
+  * [Índices únicos](propiedades-del-indice/indices-unicos.md)
+
 ## Seguridad
 
 * [Lista de verificación de seguridad](seguridad/untitled.md)

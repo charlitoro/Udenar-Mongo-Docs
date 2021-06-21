@@ -1,0 +1,2 @@
+# Propiedades del índice
+
