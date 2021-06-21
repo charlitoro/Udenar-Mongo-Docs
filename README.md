@@ -4,7 +4,7 @@ description: >-
   documental más utilizados en la actualidad.
 ---
 
-# MongoDB
+# Documental MongoDB
 
 ![](.gitbook/assets/mongodb.png)
 
