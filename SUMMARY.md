@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Document MongoDB](README.md)
+* [🍃 MongoDB](README.md)
 
 ## Introducción
 
@@ -58,7 +58,7 @@
 * [Acerca de las transacciones](transacciones/untitled.md)
 * [Drivers API](transacciones/drivers-api.md)
 * [Consideraciones de producción](transacciones/consideraciones-de-produccion.md)
-* [Consideraciones de producción \(clústeres fragmentados\)](transacciones/consideraciones-de-produccion-clusteres-fragmentados.md)
+* [Consideraciones de producción (clústeres fragmentados)](transacciones/consideraciones-de-produccion-clusteres-fragmentados.md)
 * [Transacciones y operaciones](transacciones/transacciones-y-operaciones.md)
 
 ## Indexación
@@ -74,7 +74,7 @@
   * [Controlar los resultados de la búsqueda con ponderaciones](indexacion/indices-de-texto/controlar-los-resultados-de-la-busqueda-con-ponderaciones.md)
   * [Limite el número de entradas escaneadas](indexacion/indices-de-texto/limite-el-numero-de-entradas-escaneadas.md)
 
----
+***
 
 * [Índices comodín](indices-comodin/README.md)
   * [Restricciones del índice de comodines](indices-comodin/restricciones-del-indice-de-comodines.md)
@@ -100,4 +100,3 @@
 * [Habilitar el control de acceso](seguridad/enable-access-control.md)
 * [Autenticación](seguridad/authentication.md)
 * [Control de acceso basado en roles](seguridad/role-based-access-control.md)
-
